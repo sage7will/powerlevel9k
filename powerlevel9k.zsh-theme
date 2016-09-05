@@ -1431,10 +1431,10 @@ prompt_status() {
   fi
 
   if (( ec_sum > 0 )); then
-    if [[ "$POWERLEVEL9K_STATUS_CROSS" == false && "$POWERLEVEL9K_STATUS_VERBOSE" == true ]]; then
-      "$1_prompt_segment" "$0_ERROR" "$2" "red" "yellow1" "$ec_text" 'CARRIAGE_RETURN_ICON'
-    else
-      "$1_prompt_segment" "$0_ERROR" "$2" "$DEFAULT_COLOR" "red" "" 'FAIL_ICON'
+    if [[ "$RETVAL" -ne 0 ]]; then
+      "$1_prompt_segment" "$0_ERROR" "$DEFAULT_COLOR" "red" "$DEFAULT_COLOR" '%h'
+    else 
+      "$1_prompt_segment" "$0" "$2" "green" "$DEFAULT_COLOR" '%h'
     fi
   elif [[ "$POWERLEVEL9K_STATUS_OK" == true ]] && [[ "$POWERLEVEL9K_STATUS_VERBOSE" == true || "$POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE" == true ]]; then
     "$1_prompt_segment" "$0_OK" "$2" "$DEFAULT_COLOR" "green" "" 'OK_ICON'
